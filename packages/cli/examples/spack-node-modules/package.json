@@ -1,10 +1,15 @@
 {
-	"dependencies": {
-		"@swc/cli": "file:../..",
-		"path": "^0.12.7"
-	},
-	"description": "",
-	"main": "index.js",
-	"name": "spack-example-node-modules",
-	"scripts": {}
+    "name": "spack-example-node-modules",
+    "private": true,
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {},
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@swc/cli": "file:../..",
+        "path": "^0.12.7"
+    }
 }
