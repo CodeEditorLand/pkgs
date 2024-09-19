@@ -1,9 +1,14 @@
 {
-	"dependencies": {
-		"@swc/cli": "file:../.."
-	},
-	"description": "",
-	"main": "lib/index.js",
-	"name": "spack-example-multiple-entry",
-	"scripts": {}
+    "name": "spack-example-multiple-entry",
+    "private": true,
+    "version": "1.0.0",
+    "main": "lib/index.js",
+    "scripts": {},
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "@swc/cli": "file:../.."
+    }
 }
