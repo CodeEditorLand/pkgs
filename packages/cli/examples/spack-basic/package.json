@@ -1,9 +1,14 @@
 {
-	"dependencies": {
-		"@swc/cli": "file:../.."
-	},
-	"description": "",
-	"main": "index.js",
-	"name": "spack-example-basic",
-	"scripts": {}
+    "name": "spack-example-basic",
+    "private": true,
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {},
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@swc/cli": "file:../.."
+    }
 }
