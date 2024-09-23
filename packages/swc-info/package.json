@@ -2,7 +2,7 @@
 	"bin": "bin/swc-info.js",
 	"description": "CLI tool to help issue reporting for swc",
 	"devDependencies": {
-		"@types/node": "^20.11.16"
+		"@types/node": "22.6.0"
 	},
 	"name": "swc-info",
 	"scripts": {

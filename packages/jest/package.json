@@ -1,14 +1,14 @@
 {
 	"dependencies": {
-		"@jest/create-cache-key-function": "^29.7.0",
+		"@jest/create-cache-key-function": "29.7.0",
 		"@swc/counter": "workspace:^",
-		"jsonc-parser": "^3.2.0"
+		"jsonc-parser": "3.3.1"
 	},
 	"description": "swc integration for jest",
 	"devDependencies": {
-		"@jest/transform": "^27.5.1",
-		"@swc/core": "^1.6.4",
-		"@types/node": "^16.11.12"
+		"@jest/transform": "29.7.0",
+		"@swc/core": "1.7.26",
+		"@types/node": "22.6.0"
 	},
 	"files": [
 		"index.js",
