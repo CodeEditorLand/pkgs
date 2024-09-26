@@ -6,6 +6,6 @@
 		"@swc/counter": "workspace:^"
 	},
 	"devDependencies": {
-		"@swc/core": "1.7.26"
+		"@swc/core": "1.7.28"
 	}
 }
