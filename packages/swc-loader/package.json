@@ -1,11 +1,11 @@
 {
-	"name": "swc-loader",
-	"description": "Webpack plugin for swc",
-	"main": "src/index.js",
 	"dependencies": {
 		"@swc/counter": "workspace:^"
 	},
+	"description": "Webpack plugin for swc",
 	"devDependencies": {
 		"@swc/core": "1.7.28"
-	}
+	},
+	"main": "src/index.js",
+	"name": "swc-loader"
 }

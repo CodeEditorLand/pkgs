@@ -1,28 +1,28 @@
 {
-	"name": "@swc/jest",
-	"description": "swc integration for jest",
-	"main": "index.js",
-	"types": "index.d.ts",
-	"files": [
-		"index.js",
-		"index.d.ts"
-	],
-	"workspaces": [
-		"examples/react"
-	],
-	"scripts": {
-		"build": "tsc",
-		"prepublishOnly": "npm run build && node scripts/publish_helper.js prepublish",
-		"postpublish": "node scripts/publish_helper.js postpublish"
-	},
 	"dependencies": {
 		"@jest/create-cache-key-function": "29.7.0",
 		"@swc/counter": "workspace:^",
 		"jsonc-parser": "3.3.1"
 	},
+	"description": "swc integration for jest",
 	"devDependencies": {
 		"@jest/transform": "29.7.0",
 		"@swc/core": "1.7.28",
 		"@types/node": "22.7.3"
-	}
+	},
+	"files": [
+		"index.js",
+		"index.d.ts"
+	],
+	"main": "index.js",
+	"name": "@swc/jest",
+	"scripts": {
+		"build": "tsc",
+		"postpublish": "node scripts/publish_helper.js postpublish",
+		"prepublishOnly": "npm run build && node scripts/publish_helper.js prepublish"
+	},
+	"types": "index.d.ts",
+	"workspaces": [
+		"examples/react"
+	]
 }
