@@ -1,26 +1,8 @@
 {
-	"name": "@swc/cli",
-	"description": "CLI for the swc project",
-	"main": "lib/swc/index.js",
 	"bin": {
 		"spack": "./bin/spack.js",
 		"swc": "./bin/swc.js",
 		"swcx": "./bin/swcx.js"
-	},
-	"files": [
-		"bin",
-		"lib"
-	],
-	"scripts": {
-		"build": "swc src --strip-leading-paths -d lib --ignore '**/*.test.ts' --ignore '**/__mocks__/**'",
-		"build:watch": "swc src --strip-leading-paths -d lib --watch --ignore '**/*.test.ts' --ignore '**/__mocks__/**'",
-		"format:examples": "prettier --write examples",
-		"format:src": "prettier --write src",
-		"prepublishOnly": "pnpm build",
-		"test:coverage": "JEST_COVERAGE=true jest --coverage",
-		"test:watch": "jest --watch",
-		"types": "tsc",
-		"types:watch": "tsc --watch"
 	},
 	"dependencies": {
 		"@mole-inc/bin-wrapper": "8.0.1",
@@ -33,6 +15,7 @@
 		"slash": "5.1.0",
 		"source-map": "0.7.4"
 	},
+	"description": "CLI for the swc project",
 	"devDependencies": {
 		"@swc/cli": "=0.4.0",
 		"@swc/core": "1.7.26",
@@ -43,9 +26,26 @@
 		"chokidar": "4.0.1",
 		"deepmerge": "4.3.1"
 	},
+	"files": [
+		"bin",
+		"lib"
+	],
+	"main": "lib/swc/index.js",
+	"name": "@swc/cli",
 	"peerDependenciesMeta": {
 		"chokidar": {
 			"optional": true
 		}
+	},
+	"scripts": {
+		"build": "swc src --strip-leading-paths -d lib --ignore '**/*.test.ts' --ignore '**/__mocks__/**'",
+		"build:watch": "swc src --strip-leading-paths -d lib --watch --ignore '**/*.test.ts' --ignore '**/__mocks__/**'",
+		"format:examples": "prettier --write examples",
+		"format:src": "prettier --write src",
+		"prepublishOnly": "pnpm build",
+		"test:coverage": "JEST_COVERAGE=true jest --coverage",
+		"test:watch": "jest --watch",
+		"types": "tsc",
+		"types:watch": "tsc --watch"
 	}
 }
