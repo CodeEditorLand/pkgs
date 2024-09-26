@@ -23,6 +23,6 @@
 	"devDependencies": {
 		"@jest/transform": "29.7.0",
 		"@swc/core": "1.7.28",
-		"@types/node": "22.7.2"
+		"@types/node": "22.7.3"
 	}
 }

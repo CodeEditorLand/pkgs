@@ -38,7 +38,7 @@
 		"@swc/core": "1.7.28",
 		"@swc/jest": "workspace:^",
 		"@swc/types": "0.1.12",
-		"@types/node": "22.7.2",
+		"@types/node": "22.7.3",
 		"@types/semver": "7.5.8",
 		"chokidar": "4.0.1",
 		"deepmerge": "4.3.1"
