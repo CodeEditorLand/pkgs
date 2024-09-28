@@ -1,9 +1,9 @@
 {
-	"dependencies": {
-		"@swc/cli": "file:../.."
-	},
+	"name": "spack-example-multiple-entry",
 	"description": "",
 	"main": "lib/index.js",
-	"name": "spack-example-multiple-entry",
-	"scripts": {}
+	"scripts": {},
+	"dependencies": {
+		"@swc/cli": "file:../.."
+	}
 }

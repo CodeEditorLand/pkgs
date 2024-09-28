@@ -1,9 +1,9 @@
 {
-	"dependencies": {
-		"@swc/cli": "file:../.."
-	},
+	"name": "spack-example-basic",
 	"description": "",
 	"main": "index.js",
-	"name": "spack-example-basic",
-	"scripts": {}
+	"scripts": {},
+	"dependencies": {
+		"@swc/cli": "file:../.."
+	}
 }
