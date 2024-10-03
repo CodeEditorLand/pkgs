@@ -1,36 +1,14 @@
 {
-    "name": "swc-info",
-    "packageManager": "pnpm@8.6.7",
-    "version": "0.1.16",
-    "description": "CLI tool to help issue reporting for swc",
-    "sideEffects": false,
-    "scripts": {
-        "build": "tsc",
-        "prepublishOnly": "pnpm build",
-        "prepack": "pnpm build"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/swc-project/pkgs.git"
-    },
-    "publishConfig": {
-        "registry": "https://registry.npmjs.org/",
-        "access": "public"
-    },
-    "keywords": [
-        "swc",
-        "info",
-        "cli"
-    ],
-    "author": "강동윤 <kdy1997.dev@gmail.com>",
-    "license": "Apache-2.0",
-    "bugs": {
-        "url": "https://github.com/swc-project/swc/issues"
-    },
-    "homepage": "https://swc.rs",
-    "devDependencies": {
-        "@types/node": "^20.11.16",
-        "typescript": "^5.2.2"
-    },
-    "bin": "bin/swc-info.js"
+	"bin": "bin/swc-info.js",
+	"description": "CLI tool to help issue reporting for swc",
+	"devDependencies": {
+		"@types/node": "22.7.4"
+	},
+	"name": "swc-info",
+	"scripts": {
+		"build": "tsc",
+		"prepack": "pnpm build",
+		"prepublishOnly": "pnpm build"
+	},
+	"sideEffects": false
 }
