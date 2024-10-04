@@ -1,6 +1,6 @@
 export const enum CompileStatus {
-    Copied,
-    Compiled,
-    Omitted,
-    Failed,
+	Copied,
+	Compiled,
+	Omitted,
+	Failed,
 }
