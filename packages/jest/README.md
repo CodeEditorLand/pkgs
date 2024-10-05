@@ -17,24 +17,28 @@ yarn add -D jest @swc/core @swc/jest
 
 ```js
 module.exports = {
-  transform: {
-    '^.+\\.(t|j)sx?$': '@swc/jest',
-  },
-}
+	transform: {
+		"^.+\\.(t|j)sx?$": "@swc/jest",
+	},
+};
 ```
 
-It will load the SWC configuration from `.swcrc` by default. You also can customize it:
+It will load the SWC configuration from `.swcrc` by default. You also can
+customize it:
 
 ```js
-const fs = require('fs')
+const fs = require("fs");
 
-const config = JSON.parse(fs.readFileSync(`${__dirname}/.swcrc`, 'utf-8'))
+const config = JSON.parse(fs.readFileSync(`${__dirname}/.swcrc`, "utf-8"));
 
 module.exports = {
-  transform: {
-    '^.+\\.(t|j)sx?$': ['@swc/jest', { ...config, /* custom configuration in Jest */ }],
-  },
-}
+	transform: {
+		"^.+\\.(t|j)sx?$": [
+			"@swc/jest",
+			{ ...config /* custom configuration in Jest */ },
+		],
+	},
+};
 ```
 
 ## Q & A
@@ -43,39 +47,39 @@ module.exports = {
 
 A: Setup Jest following this [Guide](https://jestjs.io/docs/ecmascript-modules).
 
-  For JavaScript, edit `package.json` as follows:
-  
-  ```json
-  {
-    // ...
-    "type": "module"
-  }
-  ```
+For JavaScript, edit `package.json` as follows:
 
-  For TypeScript, edit `jest.config.js` as follows:
+```json
+{
+	// ...
+	"type": "module"
+}
+```
 
-  ```js
-  module.exports = {
-    // ...
-    extensionsToTreatAsEsm: ['.ts', '.tsx'],
-  }
-  ```
+For TypeScript, edit `jest.config.js` as follows:
 
-  Run test with `--experimental-vm-modules`:
+```js
+module.exports = {
+	// ...
+	extensionsToTreatAsEsm: [".ts", ".tsx"],
+};
+```
 
-  ```sh
-  cross-env NODE_OPTIONS=--experimental-vm-modules jest
+Run test with `--experimental-vm-modules`:
 
-  # or
-  node --experimental-vm-modules ./node_modules/jest/bin/jest.js
-  ```
+```sh
+cross-env NODE_OPTIONS=--experimental-vm-modules jest
+
+# or
+node --experimental-vm-modules ./node_modules/jest/bin/jest.js
+```
 
 ### Q: What ECMAScript target is set by `jsc.target`?
 
 A: By default, the version supported by your Node runtime.
 
 | Node version | Default `jsc.target` |
-|--------------|----------------------|
+| ------------ | -------------------- |
 | 12           | 'es2018'             |
 | 13           | 'es2019'             |
 | 14           | 'es2020'             |
@@ -87,17 +91,17 @@ You can customize this by setting an explicit version in `jest.config.js`:
 
 ```js
 module.exports = {
-    transform: {
-        "^.+\\.(t|j)sx?$": [
-            "@swc/jest",
-            {
-                jsc: {
-                    target: "es2021",
-                },
-            },
-        ],
-    },
-}
+	transform: {
+		"^.+\\.(t|j)sx?$": [
+			"@swc/jest",
+			{
+				jsc: {
+					target: "es2021",
+				},
+			},
+		],
+	},
+};
 ```
 
 ## License
