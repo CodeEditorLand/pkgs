@@ -1,15 +1,11 @@
 {
-	"devDependencies": {
-		"@changesets/cli": "2.27.9",
-		"@taplo/cli": "0.7.0",
-		"cross-env": "7.0.3",
-		"cspell": "8.14.4",
-		"lerna": "8.1.8",
-		"lint-staged": "15.2.10"
-	},
+	"name": "swc-extra-packages-workspace",
 	"funding": {
 		"type": "opencollective",
 		"url": "https://opencollective.com/swc"
+	},
+	"scripts": {
+		"prepare": "husky install && git config feature.manyFiles true"
 	},
 	"lint-staged": {
 		"!(**/tests/**/*)*.js": [
@@ -34,8 +30,12 @@
 			"taplo format"
 		]
 	},
-	"name": "swc-extra-packages-workspace",
-	"scripts": {
-		"prepare": "husky install && git config feature.manyFiles true"
+	"devDependencies": {
+		"@changesets/cli": "2.27.9",
+		"@taplo/cli": "0.7.0",
+		"cross-env": "7.0.3",
+		"cspell": "8.14.4",
+		"lerna": "8.1.8",
+		"lint-staged": "15.2.10"
 	}
 }

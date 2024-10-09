@@ -1,10 +1,10 @@
 {
-	"dependencies": {},
+	"name": "@swc/next-minifier-backport",
 	"description": "Backport SWC Minifier without the need to upgrade Next.js",
+	"main": "index.js",
+	"scripts": {},
+	"dependencies": {},
 	"devDependencies": {
 		"@swc/core": "1.7.28"
-	},
-	"main": "index.js",
-	"name": "@swc/next-minifier-backport",
-	"scripts": {}
+	}
 }
