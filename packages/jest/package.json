@@ -7,7 +7,7 @@
 	"description": "swc integration for jest",
 	"devDependencies": {
 		"@jest/transform": "29.7.0",
-		"@swc/core": "1.7.35",
+		"@swc/core": "1.7.36",
 		"@types/node": "22.7.5"
 	},
 	"files": [

@@ -18,7 +18,7 @@
 	"description": "CLI for the swc project",
 	"devDependencies": {
 		"@swc/cli": "0.4.0",
-		"@swc/core": "1.7.35",
+		"@swc/core": "1.7.36",
 		"@swc/jest": "workspace:^",
 		"@swc/types": "0.1.12",
 		"@types/node": "22.7.5",
