@@ -1,6 +1,6 @@
 {
-	"name": "@swc/counter",
 	"description": "Downloade counter for the swc project",
-	"sideEffects": false,
-	"main": "index.js"
+	"main": "index.js",
+	"name": "@swc/counter",
+	"sideEffects": false
 }
