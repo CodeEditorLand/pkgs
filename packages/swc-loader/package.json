@@ -4,7 +4,7 @@
 	},
 	"description": "Webpack plugin for swc",
 	"devDependencies": {
-		"@swc/core": "1.7.36"
+		"@swc/core": "1.7.39"
 	},
 	"main": "src/index.js",
 	"name": "swc-loader"

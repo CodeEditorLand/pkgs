@@ -18,10 +18,10 @@
 	"description": "CLI for the swc project",
 	"devDependencies": {
 		"@swc/cli": "0.4.0",
-		"@swc/core": "1.7.36",
+		"@swc/core": "1.7.39",
 		"@swc/jest": "workspace:^",
 		"@swc/types": "0.1.12",
-		"@types/node": "22.7.7",
+		"@types/node": "22.7.9",
 		"@types/semver": "7.5.8",
 		"chokidar": "4.0.1",
 		"deepmerge": "4.3.1"
