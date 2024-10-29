@@ -8,7 +8,7 @@
 	"devDependencies": {
 		"@jest/transform": "29.7.0",
 		"@swc/core": "1.7.40",
-		"@types/node": "22.8.1"
+		"@types/node": "22.8.2"
 	},
 	"files": [
 		"index.js",
