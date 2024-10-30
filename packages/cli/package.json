@@ -5,26 +5,26 @@
 		"swcx": "./bin/swcx.js"
 	},
 	"dependencies": {
-		"@mole-inc/bin-wrapper": "^8.0.1",
+		"@mole-inc/bin-wrapper": "8.0.1",
 		"@swc/counter": "workspace:^",
-		"commander": "^8.3.0",
-		"fast-glob": "^3.2.5",
-		"minimatch": "^9.0.3",
-		"piscina": "^4.3.0",
-		"semver": "^7.3.8",
-		"slash": "3.0.0",
-		"source-map": "^0.7.3"
+		"commander": "12.1.0",
+		"fast-glob": "3.3.2",
+		"minimatch": "10.0.1",
+		"piscina": "4.7.0",
+		"semver": "7.6.3",
+		"slash": "5.1.0",
+		"source-map": "0.7.4"
 	},
 	"description": "CLI for the swc project",
 	"devDependencies": {
 		"@swc/cli": "0.5.0",
-		"@swc/core": "^1.6.4",
+		"@swc/core": "1.7.40",
 		"@swc/jest": "workspace:^",
-		"@swc/types": "^0.1.9",
-		"@types/node": "^20.11.5",
-		"@types/semver": "^7.3.13",
-		"chokidar": "^3.5.1",
-		"deepmerge": "^4.2.2"
+		"@swc/types": "0.1.12",
+		"@types/node": "22.8.4",
+		"@types/semver": "7.5.8",
+		"chokidar": "4.0.1",
+		"deepmerge": "4.3.1"
 	},
 	"files": [
 		"bin",
