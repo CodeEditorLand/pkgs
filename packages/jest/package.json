@@ -7,8 +7,8 @@
 	"description": "swc integration for jest",
 	"devDependencies": {
 		"@jest/transform": "29.7.0",
-		"@swc/core": "1.7.42",
-		"@types/node": "22.8.6"
+		"@swc/core": "1.9.1",
+		"@types/node": "22.9.0"
 	},
 	"files": [
 		"index.js",
