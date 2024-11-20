@@ -1,10 +1,10 @@
 {
-	"name": "spack-example-node-modules",
-	"description": "",
-	"main": "index.js",
-	"scripts": {},
 	"dependencies": {
 		"@swc/cli": "file:../..",
 		"path": "0.12.7"
-	}
+	},
+	"description": "",
+	"main": "index.js",
+	"name": "spack-example-node-modules",
+	"scripts": {}
 }

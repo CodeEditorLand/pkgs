@@ -1,14 +1,14 @@
 {
-	"name": "swc-info",
-	"description": "CLI tool to help issue reporting for swc",
-	"sideEffects": false,
 	"bin": "bin/swc-info.js",
+	"description": "CLI tool to help issue reporting for swc",
+	"devDependencies": {
+		"@types/node": "22.9.1"
+	},
+	"name": "swc-info",
 	"scripts": {
 		"build": "tsc",
 		"prepack": "pnpm build",
 		"prepublishOnly": "pnpm build"
 	},
-	"devDependencies": {
-		"@types/node": "22.9.1"
-	}
+	"sideEffects": false
 }
