@@ -21,6 +21,7 @@ export default async function handleCompile(opts: {
 		opts.cliOptions.stripLeadingPaths,
 		`.${opts.outFileExtension ?? DEFAULT_OUT_FILE_EXTENSION}`,
 	);
+
 	const sourceFileName = slash(relative(dirname(dest), opts.filename));
 
 	const options = { ...opts.swcOptions, sourceFileName };
@@ -34,6 +35,7 @@ export default async function handleCompile(opts: {
 			opts.cliOptions.stripLeadingPaths,
 			`.d.ts`,
 		);
+
 		const destSourcemap = dest + ".map";
 		await outputResult({
 			output: result,
@@ -43,6 +45,7 @@ export default async function handleCompile(opts: {
 			destSourcemapFile: destSourcemap,
 			options,
 		});
+
 		return CompileStatus.Compiled;
 	} else {
 		return CompileStatus.Omitted;

@@ -35,6 +35,7 @@ function withSourceMap(
 	}
 	// TODO: remove once fixed in core https://github.com/swc-project/swc/issues/1388
 	const sourceMap = JSON.parse(output.map);
+
 	if (options.sourceFileName) {
 		sourceMap["sources"][0] = options.sourceFileName;
 	}
@@ -79,11 +80,13 @@ export async function outputResult({
 	);
 
 	await mkdir(destDir, { recursive: true });
+
 	const { mode } = await stat(sourceFile);
 
 	const dtsPromise = dts
 		? writeFile(destDtsFile, dts, { mode })
 		: Promise.resolve();
+
 	const sourceMapPromise = sourceMap
 		? writeFile(destSourcemapFile, sourceMap, { mode })
 		: Promise.resolve();
@@ -102,6 +105,7 @@ export async function compile(
 	outputPath: string | undefined,
 ): Promise<Output | void> {
 	const options = { ...opts };
+
 	if (outputPath) {
 		options.outputPath = outputPath;
 	}

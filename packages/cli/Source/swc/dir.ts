@@ -36,6 +36,7 @@ async function handleCopy(
     stripLeadingPaths: boolean
 ) {
     const dest = getDest(filename, outDir, stripLeadingPaths);
+
     const dir = dirname(dest);
 
     await mkdir(dir, recursive);
@@ -49,6 +50,7 @@ async function beforeStartCompilation(cliOptions: CliOptions) {
 
     if (deleteDirOnStart) {
         const exists = await existsSync(outDir);
+
         if (exists) {
             rm ? await rm(outDir, recursive) : await rmdir(outDir, recursive);
         }
@@ -76,20 +78,24 @@ async function initialCompilation(
     } = cliOptions;
 
     const results = new Map<string, CompileStatus>();
+
     const reasons = new Map<string, string>();
 
     const start = process.hrtime();
+
     const sourceFiles = await globSources(
         filenames,
         only,
         ignore,
         includeDotfiles
     );
+
     const [compilable, copyable] = splitCompilableAndCopyable(
         sourceFiles,
         extensions,
         copyFiles
     );
+
     if (sync) {
         for (const filename of compilable) {
             try {
@@ -159,6 +165,7 @@ async function initialCompilation(
         ]).then(([compiled, copied]) => {
             compiled.forEach((result, index) => {
                 const filename = compilable[index];
+
                 if (result.status === "fulfilled") {
                     results.set(filename, result.value);
                 } else {
@@ -169,6 +176,7 @@ async function initialCompilation(
 
             copied.forEach((result, index) => {
                 const filename = copyable[index];
+
                 if (result.status === "fulfilled") {
                     results.set(filename, result.value);
                 } else {
@@ -180,18 +188,26 @@ async function initialCompilation(
     const end = process.hrtime(start);
 
     let failed = 0;
+
     let compiled = 0;
+
     let copied = 0;
+
     for (let [_, status] of results) {
         switch (status) {
             case CompileStatus.Compiled:
                 compiled += 1;
+
                 break;
+
             case CompileStatus.Failed:
                 failed += 1;
+
                 break;
+
             case CompileStatus.Copied:
                 copied += 1;
+
                 break;
         }
     }
@@ -199,6 +215,7 @@ async function initialCompilation(
 
     if (compiled + copied) {
         let message = "";
+
         if (compiled) {
             message += `Successfully compiled: ${compiled} ${
                 compiled > 1 ? "files" : "file"
@@ -230,11 +247,13 @@ async function initialCompilation(
                     failed !== 1 ? "files" : "file"
                 } with swc.`
             );
+
             if (!watch) {
                 const files = Array.from(results.entries())
                     .filter(([, status]) => status === CompileStatus.Failed)
                     .map(([filename, _]) => filename)
                     .join("\n");
+
                 throw new Error(`Failed to compile:\n${files}`);
             }
         }
@@ -272,13 +291,16 @@ async function watchCompilation(
                 await unlink(
                     getDest(filename, outDir, stripLeadingPaths, ".js")
                 );
+
                 const sourcemapPath = getDest(
                     filename,
                     outDir,
                     stripLeadingPaths,
                     ".js.map"
                 );
+
                 const sourcemapExists = await exists(sourcemapPath);
+
                 if (sourcemapExists) {
                     await unlink(sourcemapPath);
                 }
@@ -291,15 +313,20 @@ async function watchCompilation(
             }
         }
     });
+
     for (const type of ["add", "change"]) {
         watcher.on(type, async filename => {
             if (isCompilableExtension(filename, extensions)) {
                 const start = process.hrtime();
+
                 const getDuration = () => {
                     const end = process.hrtime(start);
+
                     const duration = end[1] / 1000000;
+
                     return duration;
                 };
+
                 try {
                     const result = await handleCompile({
                         filename,
@@ -309,7 +336,9 @@ async function watchCompilation(
                         swcOptions,
                         outFileExtension,
                     });
+
                     const duration = getDuration();
+
                     if (result === CompileStatus.Compiled) {
                         if (callbacks?.onSuccess) {
                             callbacks.onSuccess({
@@ -337,19 +366,25 @@ async function watchCompilation(
                 }
             } else if (copyFiles) {
                 const start = process.hrtime();
+
                 const getDuration = () => {
                     const end = process.hrtime(start);
+
                     const duration = end[1] / 1000000;
+
                     return duration;
                 };
+
                 try {
                     const result = await handleCopy(
                         filename,
                         outDir,
                         stripLeadingPaths
                     );
+
                     if (result === CompileStatus.Copied) {
                         const duration = getDuration();
+
                         if (callbacks?.onSuccess) {
                             callbacks.onSuccess({
                                 duration,

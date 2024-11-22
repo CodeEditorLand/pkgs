@@ -170,6 +170,7 @@ export default async function parseSpackArgs(args: string[]): Promise<{
 }> {
 	//
 	const cmd = program.parse(args);
+
 	const opts = cmd.opts();
 
 	const cliOptions: SpackCliOptions = {
@@ -180,6 +181,7 @@ export default async function parseSpackArgs(args: string[]): Promise<{
 	const configOpts: BundleOptions = (await compileBundleOptions(
 		opts.config ?? path.resolve("spack.config.js"),
 	)) as any;
+
 	if (opts.entry) {
 		configOpts.entry = opts.entry;
 	}

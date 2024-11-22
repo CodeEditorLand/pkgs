@@ -181,6 +181,7 @@ function loadCLIConfigFile(
 	path: string,
 ): OptionValues {
 	let configOpts: OptionValues;
+
 	let contents: string;
 
 	// Parse the JSON file
@@ -204,12 +205,14 @@ function loadCLIConfigFile(
 			const camelCaseKey = key.replace(/(-[-a-z])/g, (_, m) =>
 				m.substring(1).toUpperCase(),
 			);
+
 			return [camelCaseKey, value];
 		}),
 	);
 
 	// Split existing options in default and provided one
 	const defaults = [];
+
 	const provided = [];
 
 	for (const pair of Object.entries(opts)) {
@@ -231,6 +234,7 @@ function loadCLIConfigFile(
 function verifyArgsErrors(errors: string[]): void {
 	if (errors.length) {
 		console.error("swc:");
+
 		for (const error of errors) {
 			console.error("  " + error);
 		}
@@ -293,6 +297,7 @@ export interface Callbacks {
 
 export default function parserArgs(args: string[]) {
 	program.parse(args);
+
 	let opts = program.opts();
 
 	if (opts.cliConfigFile) {
@@ -300,11 +305,13 @@ export default function parserArgs(args: string[]) {
 			opts = loadCLIConfigFile(program, opts, opts.cliConfigFile);
 		} catch (e: any) {
 			verifyArgsErrors([e.message]);
+
 			return;
 		}
 	}
 
 	const filenames = program.args;
+
 	const errors = [];
 
 	if (opts.outDir && !filenames.length) {
@@ -337,8 +344,10 @@ export default function parserArgs(args: string[]) {
 	}
 
 	let workers: number | undefined;
+
 	if (opts.workers != null) {
 		workers = parseFloat(opts.workers);
+
 		if (!Number.isInteger(workers) || workers < 0) {
 			errors.push(
 				"--workers must be a positive integer (found " +
@@ -368,8 +377,11 @@ export default function parserArgs(args: string[]) {
 	if (opts.config) {
 		for (const cfg of opts.config as string[]) {
 			const i = cfg.indexOf("=");
+
 			let key: string;
+
 			let value: any;
+
 			if (i === -1) {
 				key = cfg;
 				value = true;
@@ -379,8 +391,11 @@ export default function parserArgs(args: string[]) {
 			}
 			// https://github.com/swc-project/cli/issues/45
 			let options = swcOptions as { [key: string]: any };
+
 			const keyParts = key.split(".");
+
 			const lastIndex = keyParts.length - 1;
+
 			for (const [index, keyPart] of keyParts.entries()) {
 				if (options[keyPart] === undefined && index !== lastIndex) {
 					options[keyPart] = {};
@@ -413,6 +428,7 @@ export default function parserArgs(args: string[]) {
 		only: opts.only || [],
 		ignore: opts.ignore || [],
 	};
+
 	return {
 		swcOptions,
 		cliOptions,

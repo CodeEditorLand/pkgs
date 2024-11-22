@@ -6,6 +6,7 @@ import { bundle } from "@swc/core";
 import parseSpackArgs from "./options";
 
 const write = promisify(writeFile);
+
 const makeDir = promisify(mkdir);
 
 (async () => {
@@ -29,16 +30,20 @@ const makeDir = promisify(mkdir);
 
 	async function build() {
 		const bundleStart = process.hrtime();
+
 		const output = await bundle(spackOptions);
+
 		const bundleEnd = process.hrtime(bundleStart);
 		console.info(
 			`Bundling done: ${bundleEnd[0]}s ${bundleEnd[1] / 1000000}ms`,
 		);
 
 		const emitStart = process.hrtime();
+
 		if (spackOptions.output?.path) {
 			await Object.keys(output).map(async (name) => {
 				let fullPath = "";
+
 				if (isUserDefinedEntry(name)) {
 					fullPath = join(
 						spackOptions.output.path,
@@ -46,7 +51,9 @@ const makeDir = promisify(mkdir);
 					);
 				} else {
 					const ext = extname(name);
+
 					const base = basename(name, ext);
+
 					const filename = relative(process.cwd(), name);
 					fullPath = join(
 						spackOptions.output.path,
@@ -57,6 +64,7 @@ const makeDir = promisify(mkdir);
 
 				await makeDir(dirname(fullPath), { recursive: true });
 				await write(fullPath, output[name].code, "utf-8");
+
 				if (output[name].map) {
 					await write(`${fullPath}.map`, output[name].map!, "utf-8");
 				}

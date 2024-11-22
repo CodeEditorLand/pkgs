@@ -3,13 +3,16 @@ import fs, { type Stats } from "fs";
 export interface MockHelpers {
 	resetMockStats: () => void;
 	resetMockFiles: () => void;
+
 	setMockStats: (stats: Record<string, Stats | Error>) => void;
+
 	setMockFile: (path: string, contents: string) => void;
 }
 
 const fsMock = jest.createMockFromModule<typeof fs & MockHelpers>("fs");
 
 let mockStats: Record<string, Stats | Error> = {};
+
 let mockFiles: Record<string, string> = {};
 
 function setMockStats(stats: Record<string, Stats | Error>) {
@@ -32,6 +35,7 @@ function resetMockFiles() {
 
 export function stat(path: string, cb: (err?: Error, stats?: Stats) => void) {
 	const result = mockStats[path];
+
 	if (result instanceof Error) {
 		cb(result, undefined);
 	} else {

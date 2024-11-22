@@ -34,8 +34,10 @@ function createTransformer(
 		[],
 		[swcVersion, version, JSON.stringify(computedSwcOptions)],
 	);
+
 	const { enabled: canInstrument, ...instrumentOptions } =
 		swcTransformOpts?.experimental?.customCoverageInstrumentation ?? {};
+
 	return {
 		canInstrument: !!canInstrument, // Tell jest we'll instrument by our own
 		process(src, filename, jestOptions) {
@@ -102,8 +104,10 @@ export = { createTransformer };
 
 function getOptionsFromSwrc(): Options {
 	const swcrc = path.join(process.cwd(), ".swcrc");
+
 	if (fs.existsSync(swcrc)) {
 		const errors = [] as ParseError[];
+
 		const options = parseJsonC(fs.readFileSync(swcrc, "utf-8"), errors);
 
 		if (errors.length > 0) {
@@ -207,7 +211,9 @@ function insertInstrumentationOptions(
 
 function set(obj: any, path: string, value: any) {
 	let o = obj;
+
 	const parents = path.split(".");
+
 	const key = parents.pop() as string;
 
 	for (const prop of parents) {

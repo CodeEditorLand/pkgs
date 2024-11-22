@@ -19,12 +19,14 @@ export default async function ({
 		...results: swc.Output[]
 	): Promise<swc.Output> {
 		let added = false;
+
 		const map = new SourceMapGenerator({
 			file,
 			sourceRoot: swcOptions.sourceRoot,
 		});
 
 		let code = "";
+
 		let offset = 0;
 
 		for (const result of results) {
@@ -34,6 +36,7 @@ export default async function ({
 				added = true;
 
 				const consumer = await new SourceMapConsumer(result.map);
+
 				const sources = new Set<string>();
 
 				consumer.eachMapping((mapping) => {
@@ -53,6 +56,7 @@ export default async function ({
 
 				sources.forEach((source) => {
 					const content = consumer.sourceContentFor(source, true);
+
 					if (content !== null) {
 						map.setSourceContent(source, content);
 					}
@@ -82,6 +86,7 @@ export default async function ({
 			util.outputFile(result, cliOptions.outFile, swcOptions.sourceMaps);
 		} else {
 			process.stdout.write(result.code + "\n");
+
 			if (result.map) {
 				const map = `//#sourceMappingURL=data:application/json;charset=utf-8;base64,${Buffer.from(
 					JSON.stringify(result.map),
@@ -98,6 +103,7 @@ export default async function ({
 				? path.relative(path.dirname(cliOptions.outFile), filename)
 				: filename,
 		);
+
 		return await util.compile(
 			filename,
 			{
@@ -129,9 +135,11 @@ export default async function ({
 
 	async function files() {
 		let results = await getProgram();
+
 		for (const filename of results.keys()) {
 			try {
 				const result = await handle(filename);
+
 				if (result) {
 					results.set(filename, result);
 				} else {
@@ -153,6 +161,7 @@ export default async function ({
 					.then(async () => {
 						util.assertCompilationResult(results, cliOptions.quiet);
 						await output(results.values());
+
 						if (!cliOptions.quiet) {
 							console.info("Watching for file changes.");
 						}
@@ -170,6 +179,7 @@ export default async function ({
 			watcher.on("unlink", (filename) => {
 				results.delete(filename);
 			});
+
 			for (const type of ["add", "change"]) {
 				watcher.on(type, (filename) => {
 					if (
@@ -184,15 +194,19 @@ export default async function ({
 						.then(async (result) => {
 							if (!result) {
 								results.delete(filename);
+
 								return;
 							}
 							results.set(filename, result);
 							util.assertCompilationResult(results, true);
 							await output(results.values());
+
 							if (!cliOptions.quiet) {
 								const [seconds, nanoseconds] =
 									process.hrtime(start);
+
 								const ms = seconds * 1000 + nanoseconds * 1e-6;
+
 								const name = path.basename(cliOptions.outFile);
 								console.log(
 									`Compiled ${name} in ${ms.toFixed(2)}ms`,
@@ -213,6 +227,7 @@ export default async function ({
 	async function stdin() {
 		let code = "";
 		process.stdin.setEncoding("utf8");
+
 		for await (const chunk of process.stdin) {
 			code += chunk;
 		}

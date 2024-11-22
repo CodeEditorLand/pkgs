@@ -31,6 +31,7 @@ export async function globSources(
 					stat(source, (err, stat) => {
 						if (err) {
 							resolve([]);
+
 							return;
 						}
 						if (!stat.isDirectory()) {
@@ -66,6 +67,7 @@ export function isCompilableExtension(
 	allowedExtension: string[],
 ): boolean {
 	const ext = extname(filename);
+
 	return allowedExtension.includes(ext);
 }
 
@@ -78,6 +80,7 @@ export function splitCompilableAndCopyable(
 	copyFiles: boolean,
 ): Split {
 	const compilable: string[] = [];
+
 	const copyable: string[] = [];
 
 	for (const file of files) {
@@ -96,12 +99,14 @@ export function splitCompilableAndCopyable(
 export async function requireChokidar() {
 	try {
 		const { default: chokidar } = await import("chokidar");
+
 		return chokidar;
 	} catch (err) {
 		console.error(
 			"The optional dependency chokidar is not installed and is required for " +
 				"--watch. Chokidar is likely not supported on your platform.",
 		);
+
 		throw err;
 	}
 }

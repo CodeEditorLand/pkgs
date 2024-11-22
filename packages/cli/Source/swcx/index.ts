@@ -4,6 +4,7 @@ import minVersion from "semver/ranges/min-version";
 import { existsSync, readFileSync } from "fs";
 import * as path from "path";
 import { spawn, StdioOptions } from "child_process";
+
 const { BinWrapper } = require("@xhmikosr/bin-wrapper");
 
 const { platform, arch } = process;
@@ -33,6 +34,7 @@ const getCoreVersion = () => {
         console.log(
             `Using swc core version from ${SWC_CLI_ENV.SWCX_CORE_VERSION_OVERRIDE} env variable`
         );
+
         return `${process.env[SWC_CLI_ENV.SWCX_CORE_VERSION_OVERRIDE]}`;
     }
 
@@ -42,14 +44,17 @@ const getCoreVersion = () => {
                 process.cwd(),
                 "package.json"
             );
+
             if (existsSync(cwdPackageManifestPath)) {
                 const {
                     dependencies,
                     devDependencies,
                 } = require(cwdPackageManifestPath);
+
                 const swcCoreVersion =
                     dependencies?.["@swc/core"] ||
                     devDependencies?.["@swc/core"];
+
                 if (swcCoreVersion) {
                     return minVersion(swcCoreVersion);
                 }
@@ -89,6 +94,7 @@ const isMusl = () =>
                 const { glibcVersionRuntime } = (
                     process.report.getReport() as any
                 ).header;
+
                 return !glibcVersionRuntime;
             }
         }
@@ -127,7 +133,9 @@ const getBinaryName = () => {
 
 const executeBinary = async () => {
     const coreVersion = getCoreVersion();
+
     const releaseBase = `https://github.com/swc-project/swc/releases/download/v${coreVersion}`;
+
     const binaryName = getBinaryName();
 
     const bin = new BinWrapper({
@@ -144,6 +152,7 @@ const executeBinary = async () => {
     const binPath = bin.path;
 
     const [, , ...args] = process.argv;
+
     const options = { cwd: process.cwd(), stdio: "inherit" as StdioOptions };
 
     return spawn(binPath, args, options);

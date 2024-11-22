@@ -34,6 +34,7 @@ function getPackageVersion(packageName: string) {
 
 function interestingPackage(name: string): string | null {
 	const version = getPackageVersion(name);
+
 	if (version) {
 		return `${name}: ${version}`;
 	} else {

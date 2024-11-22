@@ -6,6 +6,7 @@ import { stderr } from "process";
 
 export async function exists(path: string): Promise<boolean> {
     let pathExists = true;
+
     try {
         await promises.access(path);
     } catch (err: any) {
@@ -46,6 +47,7 @@ export async function compile(
     opts = {
         ...opts,
     };
+
     if (outputPath) {
         opts.outputPath = outputPath;
     }
@@ -59,6 +61,7 @@ export async function compile(
             // TODO: fix this in core
             // https://github.com/swc-project/swc/issues/1388
             const sourceMap = JSON.parse(result.map);
+
             if (opts.sourceFileName) {
                 sourceMap["sources"][0] = opts.sourceFileName;
             }
@@ -84,9 +87,11 @@ export function outputFile(
     mkdirSync(destDir, { recursive: true });
 
     let code = output.code;
+
     if (output.map && sourceMaps !== "inline") {
         // we've requested for a sourcemap to be written to disk
         const fileDirName = dirname(filename);
+
         const mapLoc = filename + ".map";
         code +=
             "\n//# sourceMappingURL=" + slash(relative(fileDirName, mapLoc));
@@ -101,8 +106,11 @@ export function assertCompilationResult<T>(
     quiet = false
 ): asserts result is Map<string, T> {
     let compiled = 0;
+
     let copied = 0;
+
     let failed = 0;
+
     for (const value of result.values()) {
         if (value instanceof Error) {
             failed++;
@@ -132,6 +140,7 @@ export function assertCompilationResult<T>(
 
 function stripComponents(filename: string) {
     const components = filename.split("/").slice(1);
+
     if (!components.length) {
         return filename;
     }
@@ -150,6 +159,7 @@ export function getDest(
     ext?: string
 ) {
     let base = slash(relative(cwd, filename));
+
     if (stripLeadingPaths) {
         base = stripComponents(base);
     }

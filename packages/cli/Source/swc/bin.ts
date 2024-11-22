@@ -3,7 +3,9 @@ import fileCommand from "./file";
 import parseArgs, { initProgram } from "./options";
 
 initProgram();
+
 const opts = parseArgs(process.argv);
+
 const fn = opts.cliOptions.outDir ? dirCommand : fileCommand;
 
 process.on("uncaughtException", function (err) {
