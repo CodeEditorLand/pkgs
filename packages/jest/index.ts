@@ -144,15 +144,15 @@ function buildSwcTransformOpts(
 			? swcOptions
 			: (getOptionsFromSwrc() as Options & { experimental?: unknown });
 
-    if (!computedSwcOptions.env && !computedSwcOptions.jsc?.target) {
-        set(
-            computedSwcOptions,
-            "jsc.target",
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            nodeTargetDefaults.get(process.version?.match(/v(\d+)/)![1]) ||
-                "es2018"
-        );
-    }
+	if (!computedSwcOptions.env && !computedSwcOptions.jsc?.target) {
+		set(
+			computedSwcOptions,
+			"jsc.target",
+			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+			nodeTargetDefaults.get(process.version?.match(/v(\d+)/)![1]) ||
+				"es2018",
+		);
+	}
 
 	set(computedSwcOptions, "jsc.transform.hidden.jest", true);
 

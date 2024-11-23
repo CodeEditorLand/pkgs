@@ -1,19 +1,18 @@
 #!/usr/bin/env node
-
-import minVersion from "semver/ranges/min-version";
+import { spawn, StdioOptions } from "child_process";
 import { existsSync, readFileSync } from "fs";
 import * as path from "path";
-import { spawn, StdioOptions } from "child_process";
+import minVersion from "semver/ranges/min-version";
 
 const { BinWrapper } = require("@xhmikosr/bin-wrapper");
 
 const { platform, arch } = process;
 
 const SWC_CLI_ENV = {
-    // Allow to specify specific version of swc binary version to use
-    SWCX_CORE_VERSION_OVERRIDE: "SWCX_CORE_VERSION_OVERRIDE",
-    // Allow to skip check peer @swc/core version check
-    SWCX_SKIP_CORE_VERSION_CHECK: "SWCX_SKIP_CORE_VERSION_CHECK",
+	// Allow to specify specific version of swc binary version to use
+	SWCX_CORE_VERSION_OVERRIDE: "SWCX_CORE_VERSION_OVERRIDE",
+	// Allow to skip check peer @swc/core version check
+	SWCX_SKIP_CORE_VERSION_CHECK: "SWCX_SKIP_CORE_VERSION_CHECK",
 };
 
 /**
@@ -28,134 +27,133 @@ const SWC_CLI_ENV = {
  * validity of the version.
  */
 const getCoreVersion = () => {
-    const latestVersion = "1.3.24";
+	const latestVersion = "1.3.24";
 
-    if (process.env[SWC_CLI_ENV.SWCX_CORE_VERSION_OVERRIDE]) {
-        console.log(
-            `Using swc core version from ${SWC_CLI_ENV.SWCX_CORE_VERSION_OVERRIDE} env variable`
-        );
+	if (process.env[SWC_CLI_ENV.SWCX_CORE_VERSION_OVERRIDE]) {
+		console.log(
+			`Using swc core version from ${SWC_CLI_ENV.SWCX_CORE_VERSION_OVERRIDE} env variable`,
+		);
 
-        return `${process.env[SWC_CLI_ENV.SWCX_CORE_VERSION_OVERRIDE]}`;
-    }
+		return `${process.env[SWC_CLI_ENV.SWCX_CORE_VERSION_OVERRIDE]}`;
+	}
 
-    try {
-        if (!process.env[SWC_CLI_ENV.SWCX_SKIP_CORE_VERSION_CHECK]) {
-            const cwdPackageManifestPath = path.resolve(
-                process.cwd(),
-                "package.json"
-            );
+	try {
+		if (!process.env[SWC_CLI_ENV.SWCX_SKIP_CORE_VERSION_CHECK]) {
+			const cwdPackageManifestPath = path.resolve(
+				process.cwd(),
+				"package.json",
+			);
 
-            if (existsSync(cwdPackageManifestPath)) {
-                const {
-                    dependencies,
-                    devDependencies,
-                } = require(cwdPackageManifestPath);
+			if (existsSync(cwdPackageManifestPath)) {
+				const { dependencies, devDependencies } = require(
+					cwdPackageManifestPath,
+				);
 
-                const swcCoreVersion =
-                    dependencies?.["@swc/core"] ||
-                    devDependencies?.["@swc/core"];
+				const swcCoreVersion =
+					dependencies?.["@swc/core"] ||
+					devDependencies?.["@swc/core"];
 
-                if (swcCoreVersion) {
-                    return minVersion(swcCoreVersion);
-                }
-            } else {
-                return latestVersion;
-            }
-        } else {
-            console.log(
-                `Skipping swc core version check due to ${SWC_CLI_ENV.SWCX_SKIP_CORE_VERSION_CHECK} env variable`
-            );
-        }
-    } catch (e) {
-        console.warn(
-            `Failed to determine swc core version from package.json, using latest available version ${latestVersion} instead`,
-            e
-        );
-    }
+				if (swcCoreVersion) {
+					return minVersion(swcCoreVersion);
+				}
+			} else {
+				return latestVersion;
+			}
+		} else {
+			console.log(
+				`Skipping swc core version check due to ${SWC_CLI_ENV.SWCX_SKIP_CORE_VERSION_CHECK} env variable`,
+			);
+		}
+	} catch (e) {
+		console.warn(
+			`Failed to determine swc core version from package.json, using latest available version ${latestVersion} instead`,
+			e,
+		);
+	}
 
-    return latestVersion;
+	return latestVersion;
 };
 
 const isMusl = () =>
-    (() => {
-        function isMusl() {
-            if (
-                !process.report ||
-                typeof process.report.getReport !== "function"
-            ) {
-                try {
-                    return readFileSync("/usr/bin/ldd", "utf8").includes(
-                        "musl"
-                    );
-                } catch (e) {
-                    return true;
-                }
-            } else {
-                const { glibcVersionRuntime } = (
-                    process.report.getReport() as any
-                ).header;
+	(() => {
+		function isMusl() {
+			if (
+				!process.report ||
+				typeof process.report.getReport !== "function"
+			) {
+				try {
+					return readFileSync("/usr/bin/ldd", "utf8").includes(
+						"musl",
+					);
+				} catch (e) {
+					return true;
+				}
+			} else {
+				const { glibcVersionRuntime } = (
+					process.report.getReport() as any
+				).header;
 
-                return !glibcVersionRuntime;
-            }
-        }
+				return !glibcVersionRuntime;
+			}
+		}
 
-        return isMusl();
-    })();
+		return isMusl();
+	})();
 
 const getBinaryName = () => {
-    const platformBinaryMap: Record<string, Partial<Record<string, string>>> = {
-        win32: {
-            x64: "swc-win32-x64-msvc.exe",
-            ia32: "swc-win32-ia32-msvc.exe",
-            arm64: "swc-win32-arm64-msvc.exe",
-        },
-        darwin: {
-            x64: "swc-darwin-x64",
-            arm64: "swc-darwin-arm64",
-        },
-        linux: {
-            x64: `swc-linux-x64-${isMusl() ? "musl" : "gnu"}`,
-            arm64: `swc-linux-arm64-${isMusl() ? "musl" : "gnu"}`,
-            arm: "swc-linux-arm64-gnu",
-        },
-    };
+	const platformBinaryMap: Record<string, Partial<Record<string, string>>> = {
+		win32: {
+			x64: "swc-win32-x64-msvc.exe",
+			ia32: "swc-win32-ia32-msvc.exe",
+			arm64: "swc-win32-arm64-msvc.exe",
+		},
+		darwin: {
+			x64: "swc-darwin-x64",
+			arm64: "swc-darwin-arm64",
+		},
+		linux: {
+			x64: `swc-linux-x64-${isMusl() ? "musl" : "gnu"}`,
+			arm64: `swc-linux-arm64-${isMusl() ? "musl" : "gnu"}`,
+			arm: "swc-linux-arm64-gnu",
+		},
+	};
 
-    const binaryName = platformBinaryMap[platform][arch];
+	const binaryName = platformBinaryMap[platform][arch];
 
-    if (!binaryName) {
-        throw new Error(
-            `Unsupported platform: binary ${binaryName} for '${platform} ${arch}' is not available`
-        );
-    }
+	if (!binaryName) {
+		throw new Error(
+			`Unsupported platform: binary ${binaryName} for '${platform} ${arch}' is not available`,
+		);
+	}
 
-    return binaryName;
+	return binaryName;
 };
 
 const executeBinary = async () => {
-    const coreVersion = getCoreVersion();
+	const coreVersion = getCoreVersion();
 
-    const releaseBase = `https://github.com/swc-project/swc/releases/download/v${coreVersion}`;
+	const releaseBase = `https://github.com/swc-project/swc/releases/download/v${coreVersion}`;
 
-    const binaryName = getBinaryName();
+	const binaryName = getBinaryName();
 
-    const bin = new BinWrapper({
-        // do not explicitly run the binary to check existence to avoid
-        // redundant spawn
-        skipCheck: true,
-    })
-        .src(`${releaseBase}/${binaryName}`, platform, arch)
-        .dest(`node_modules/.bin/swc-cli-${coreVersion}`)
-        .use(binaryName);
+	const bin = new BinWrapper({
+		// do not explicitly run the binary to check existence to avoid
+		// redundant spawn
+		skipCheck: true,
+	})
+		.src(`${releaseBase}/${binaryName}`, platform, arch)
+		.dest(`node_modules/.bin/swc-cli-${coreVersion}`)
+		.use(binaryName);
 
-    await bin.run();
+	await bin.run();
 
-    const binPath = bin.path;
+	const binPath = bin.path;
 
-    const [, , ...args] = process.argv;
+	const [, , ...args] = process.argv;
 
-    const options = { cwd: process.cwd(), stdio: "inherit" as StdioOptions };
+	const options = { cwd: process.cwd(), stdio: "inherit" as StdioOptions };
 
-    return spawn(binPath, args, options);
+	return spawn(binPath, args, options);
 };
 
-executeBinary().catch(e => console.error(e));
+executeBinary().catch((e) => console.error(e));
