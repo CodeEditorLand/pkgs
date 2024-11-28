@@ -18,6 +18,7 @@ const DEFAULT_EXTENSIONS = [
 const pkg = require("../../package.json");
 
 let program: Command;
+
 export const DEFAULT_OUT_FILE_EXTENSION = "js";
 
 export const initProgram = () => {
