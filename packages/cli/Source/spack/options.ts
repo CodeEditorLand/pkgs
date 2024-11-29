@@ -166,6 +166,7 @@ program.version(
 
 export default async function parseSpackArgs(args: string[]): Promise<{
 	cliOptions: SpackCliOptions;
+
 	spackOptions: BundleOptions;
 }> {
 	//
@@ -185,18 +186,23 @@ export default async function parseSpackArgs(args: string[]): Promise<{
 	if (opts.entry) {
 		configOpts.entry = opts.entry;
 	}
+
 	if (opts.mode) {
 		configOpts.mode = opts.mode;
 	}
+
 	if (opts.target) {
 		configOpts.target = opts.target;
 	}
+
 	if (!configOpts.output) {
 		configOpts.output = {} as any;
 	}
+
 	if (!configOpts.output.path) {
 		configOpts.output.path = opts.outputPath ?? "[name].js";
 	}
+
 	if (!configOpts.output.name) {
 		configOpts.output.name = opts.output ?? "[name].js";
 	}

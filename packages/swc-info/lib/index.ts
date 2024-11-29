@@ -48,16 +48,23 @@ function interestingPackages(names: string[]): string {
 console.log(`
     Operating System:
         Platform: ${os.platform()}
+
         Arch: ${os.arch()}
+
         Machine Type: ${os.machine()}
+
         Version: ${os.version()}
+
         CPU: (${os.cpus().length} cores)
             Models: ${getUniqueCpuNames()}
 
     Binaries:
         Node: ${process.versions.node}
+
         npm: ${getBinaryVersion("npm")}
+
         Yarn: ${getBinaryVersion("yarn")}
+
         pnpm: ${getBinaryVersion("pnpm")}
 
     Relevant Packages:

@@ -34,6 +34,7 @@ export async function globSources(
 
 							return;
 						}
+
 						if (!stat.isDirectory()) {
 							resolve([source]);
 						} else {

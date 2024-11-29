@@ -40,6 +40,7 @@ async function handleCopy(
 	const dir = dirname(dest);
 
 	await mkdir(dir, recursive);
+
 	await copyFile(filename, dest);
 
 	return CompileStatus.Copied;
@@ -107,14 +108,17 @@ async function initialCompilation(
 					swcOptions,
 					outFileExtension,
 				});
+
 				results.set(filename, result);
 			} catch (err: any) {
 				if (!callbacks?.onFail) {
 					console.error(err.message);
 				}
+
 				results.set(filename, CompileStatus.Failed);
 			}
 		}
+
 		for (const filename of copyable) {
 			try {
 				const result = await handleCopy(
@@ -122,11 +126,13 @@ async function initialCompilation(
 					outDir,
 					stripLeadingPaths,
 				);
+
 				results.set(filename, result);
 			} catch (err: any) {
 				if (!callbacks?.onFail) {
 					console.error(err.message);
 				}
+
 				results.set(filename, CompileStatus.Failed);
 			}
 		}
@@ -153,6 +159,7 @@ async function initialCompilation(
 							if (!callbacks?.onFail) {
 								console.error(err.message);
 							}
+
 							throw err;
 						}),
 				),
@@ -170,6 +177,7 @@ async function initialCompilation(
 					results.set(filename, result.value);
 				} else {
 					results.set(filename, CompileStatus.Failed);
+
 					reasons.set(filename, result.reason.message);
 				}
 			});
@@ -185,6 +193,7 @@ async function initialCompilation(
 			});
 		});
 	}
+
 	const end = process.hrtime(start);
 
 	let failed = 0;
@@ -211,6 +220,7 @@ async function initialCompilation(
 				break;
 		}
 	}
+
 	const duration = end[1] / 1000000;
 
 	if (compiled + copied) {
@@ -221,12 +231,15 @@ async function initialCompilation(
 				compiled > 1 ? "files" : "file"
 			}`;
 		}
+
 		if (compiled && copied) {
 			message += ", ";
 		}
+
 		if (copied) {
 			message += `copied ${copied} ${copied > 1 ? "files" : "file"}`;
 		}
+
 		message += format(" with swc (%dms)\n", duration.toFixed(2));
 
 		if (callbacks?.onSuccess) {
@@ -278,6 +291,7 @@ async function watchCompilation(
 	} = cliOptions;
 
 	const watcher = await watchSources(filenames, includeDotfiles);
+
 	watcher.on("ready", () => {
 		if (callbacks?.onWatchReady) {
 			callbacks.onWatchReady();
@@ -285,6 +299,7 @@ async function watchCompilation(
 			console.info("Watching for file changes.");
 		}
 	});
+
 	watcher.on("unlink", async (filename) => {
 		try {
 			if (isCompilableExtension(filename, extensions)) {
@@ -358,7 +373,9 @@ async function watchCompilation(
 				} catch (error: any) {
 					if (callbacks?.onFail) {
 						const reasons = new Map<string, string>();
+
 						reasons.set(filename, error.message);
+
 						callbacks.onFail({ duration: getDuration(), reasons });
 					} else {
 						console.error(error.message);
@@ -403,10 +420,13 @@ async function watchCompilation(
 				} catch (error: any) {
 					if (callbacks?.onFail) {
 						const reasons = new Map<string, string>();
+
 						reasons.set(filename, error.message);
+
 						callbacks.onFail({ duration: getDuration(), reasons });
 					} else {
 						console.error(`Failed to copy ${filename}`);
+
 						console.error(error.message);
 					}
 				}
@@ -421,12 +441,15 @@ export default async function dir({
 	callbacks,
 }: {
 	cliOptions: CliOptions;
+
 	swcOptions: Options;
+
 	callbacks?: Callbacks;
 }) {
 	const { watch } = cliOptions;
 
 	await beforeStartCompilation(cliOptions);
+
 	await initialCompilation(cliOptions, swcOptions, callbacks);
 
 	if (watch) {

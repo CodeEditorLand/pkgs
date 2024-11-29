@@ -12,6 +12,7 @@ export default async function ({
 	swcOptions,
 }: {
 	cliOptions: CliOptions;
+
 	swcOptions: swc.Options;
 }) {
 	async function concatResults(
@@ -41,6 +42,7 @@ export default async function ({
 
 				consumer.eachMapping((mapping) => {
 					sources.add(mapping.source);
+
 					map.addMapping({
 						generated: {
 							line: mapping.generatedLine + offset,
@@ -62,6 +64,7 @@ export default async function ({
 					}
 				});
 			}
+
 			offset = code.split("\n").length - 1;
 		}
 
@@ -92,6 +95,7 @@ export default async function ({
 					JSON.stringify(result.map),
 					"utf8",
 				).toString("base64")}`;
+
 				process.stdout.write(map);
 			}
 		}
@@ -130,6 +134,7 @@ export default async function ({
 				results.set(filename, previousResults.get(filename)!);
 			}
 		}
+
 		return results;
 	}
 
@@ -147,6 +152,7 @@ export default async function ({
 				}
 			} catch (err: any) {
 				console.error(err.message);
+
 				results.set(filename, err);
 			}
 		}
@@ -156,10 +162,12 @@ export default async function ({
 				cliOptions.filenames,
 				cliOptions.includeDotfiles,
 			);
+
 			watcher.on("ready", () => {
 				Promise.resolve()
 					.then(async () => {
 						util.assertCompilationResult(results, cliOptions.quiet);
+
 						await output(results.values());
 
 						if (!cliOptions.quiet) {
@@ -170,12 +178,14 @@ export default async function ({
 						console.error(err.message);
 					});
 			});
+
 			watcher.on("add", async (filename) => {
 				if (isCompilableExtension(filename, cliOptions.extensions)) {
 					// ensure consistent insertion order when files are added
 					results = await getProgram(results);
 				}
 			});
+
 			watcher.on("unlink", (filename) => {
 				results.delete(filename);
 			});
@@ -197,8 +207,11 @@ export default async function ({
 
 								return;
 							}
+
 							results.set(filename, result);
+
 							util.assertCompilationResult(results, true);
+
 							await output(results.values());
 
 							if (!cliOptions.quiet) {
@@ -208,6 +221,7 @@ export default async function ({
 								const ms = seconds * 1000 + nanoseconds * 1e-6;
 
 								const name = path.basename(cliOptions.outFile);
+
 								console.log(
 									`Compiled ${name} in ${ms.toFixed(2)}ms`,
 								);
@@ -220,17 +234,20 @@ export default async function ({
 			}
 		} else {
 			util.assertCompilationResult(results, cliOptions.quiet);
+
 			await output(results.values());
 		}
 	}
 
 	async function stdin() {
 		let code = "";
+
 		process.stdin.setEncoding("utf8");
 
 		for await (const chunk of process.stdin) {
 			code += chunk;
 		}
+
 		const res = await util.transform(
 			cliOptions.filename,
 			code,

@@ -39,9 +39,11 @@ function withSourceMap(
 	if (options.sourceFileName) {
 		sourceMap["sources"][0] = options.sourceFileName;
 	}
+
 	if (options.sourceRoot) {
 		sourceMap["sourceRoot"] = options.sourceRoot;
 	}
+
 	output.map = JSON.stringify(sourceMap);
 
 	output.code += `\n//# sourceMappingURL=${slash(
@@ -64,10 +66,15 @@ export async function outputResult({
 	options,
 }: {
 	output: Output;
+
 	sourceFile: string;
+
 	destFile: string;
+
 	destDtsFile: string;
+
 	destSourcemapFile: string;
+
 	options: Options;
 }) {
 	const destDir = dirname(destFile);

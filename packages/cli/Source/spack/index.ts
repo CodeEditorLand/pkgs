@@ -16,12 +16,14 @@ const makeDir = promisify(mkdir);
 		if (typeof spackOptions.entry === "string") {
 			return spackOptions.entry === name;
 		}
+
 		if (Array.isArray(spackOptions.entry)) {
 			for (const e of spackOptions.entry) {
 				if (e === name) {
 					return true;
 				}
 			}
+
 			return false;
 		}
 
@@ -34,6 +36,7 @@ const makeDir = promisify(mkdir);
 		const output = await bundle(spackOptions);
 
 		const bundleEnd = process.hrtime(bundleStart);
+
 		console.info(
 			`Bundling done: ${bundleEnd[0]}s ${bundleEnd[1] / 1000000}ms`,
 		);
@@ -55,6 +58,7 @@ const makeDir = promisify(mkdir);
 					const base = basename(name, ext);
 
 					const filename = relative(process.cwd(), name);
+
 					fullPath = join(
 						spackOptions.output.path,
 						dirname(filename),
@@ -63,6 +67,7 @@ const makeDir = promisify(mkdir);
 				}
 
 				await makeDir(dirname(fullPath), { recursive: true });
+
 				await write(fullPath, output[name].code, "utf-8");
 
 				if (output[name].map) {
@@ -72,7 +77,9 @@ const makeDir = promisify(mkdir);
 		} else {
 			throw new Error("Cannot print to stdout: not implemented yet");
 		}
+
 		const emitEnd = process.hrtime(emitStart);
+
 		console.info(`Done: ${emitEnd[0]}s ${emitEnd[1] / 1000000}ms`);
 	}
 

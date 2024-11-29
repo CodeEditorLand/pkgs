@@ -12,6 +12,7 @@ export async function exists(path: string): Promise<boolean> {
 	} catch (err: any) {
 		pathExists = false;
 	}
+
 	return pathExists;
 }
 
@@ -65,11 +66,14 @@ export async function compile(
 			if (opts.sourceFileName) {
 				sourceMap["sources"][0] = opts.sourceFileName;
 			}
+
 			if (opts.sourceRoot) {
 				sourceMap["sourceRoot"] = opts.sourceRoot;
 			}
+
 			result.map = JSON.stringify(sourceMap);
 		}
+
 		return result;
 	} catch (err: any) {
 		if (!err.message.includes("ignored by .swcrc")) {
@@ -84,6 +88,7 @@ export function outputFile(
 	sourceMaps: undefined | swc.Options["sourceMaps"],
 ) {
 	const destDir = dirname(filename);
+
 	mkdirSync(destDir, { recursive: true });
 
 	let code = output.code;
@@ -93,8 +98,10 @@ export function outputFile(
 		const fileDirName = dirname(filename);
 
 		const mapLoc = filename + ".map";
+
 		code +=
 			"\n//# sourceMappingURL=" + slash(relative(fileDirName, mapLoc));
+
 		writeFileSync(mapLoc, output.map);
 	}
 
@@ -120,8 +127,10 @@ export function assertCompilationResult<T>(
 			compiled++;
 		}
 	}
+
 	if (!quiet && compiled + copied > 0) {
 		const copyResult = copied === 0 ? " " : ` (copied ${copied}) `;
+
 		stderr.write(
 			`Successfully compiled ${compiled} ${
 				compiled !== 1 ? "files" : "file"
@@ -144,9 +153,11 @@ function stripComponents(filename: string) {
 	if (!components.length) {
 		return filename;
 	}
+
 	while (components[0] === "..") {
 		components.shift();
 	}
+
 	return components.join("/");
 }
 
@@ -163,8 +174,10 @@ export function getDest(
 	if (stripLeadingPaths) {
 		base = stripComponents(base);
 	}
+
 	if (ext) {
 		base = base.replace(/\.\w*$/, ext);
 	}
+
 	return join(outDir, base);
 }

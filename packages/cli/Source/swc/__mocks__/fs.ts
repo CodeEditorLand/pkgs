@@ -2,6 +2,7 @@ import fs, { type Stats } from "fs";
 
 export interface MockHelpers {
 	resetMockStats: () => void;
+
 	resetMockFiles: () => void;
 
 	setMockStats: (stats: Record<string, Stats | Error>) => void;

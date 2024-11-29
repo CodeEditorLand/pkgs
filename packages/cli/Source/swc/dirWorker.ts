@@ -9,10 +9,15 @@ import { compile, getDest } from "./util";
 
 export default async function handleCompile(opts: {
 	filename: string;
+
 	outDir: string;
+
 	sync: boolean;
+
 	cliOptions: CliOptions;
+
 	swcOptions: Options;
+
 	outFileExtension?: string;
 }) {
 	const dest = getDest(
@@ -37,6 +42,7 @@ export default async function handleCompile(opts: {
 		);
 
 		const destSourcemap = dest + ".map";
+
 		await outputResult({
 			output: result,
 			sourceFile: opts.filename,

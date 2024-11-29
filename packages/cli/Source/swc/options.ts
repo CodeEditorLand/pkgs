@@ -155,6 +155,7 @@ export const initProgram = () => {
 `);
 
 	program.usage("[options] <files ...>");
+
 	program.addHelpText(
 		"beforeAll",
 		`
@@ -239,6 +240,7 @@ function verifyArgsErrors(errors: string[]): void {
 		for (const error of errors) {
 			console.error("  " + error);
 		}
+
 		process.exit(2);
 	}
 }
@@ -258,25 +260,39 @@ function collect(
 
 export interface CliOptions {
 	readonly outDir: string;
+
 	readonly outFile: string;
+
 	readonly stripLeadingPaths: boolean;
 	/**
 	 * Invoke swc using transformSync. It's useful for debugging.
 	 */
 	readonly sync: boolean;
+
 	readonly workers: number | undefined;
+
 	readonly sourceMapTarget?: string;
+
 	readonly filename: string;
+
 	readonly filenames: string[];
+
 	readonly extensions: string[];
+
 	readonly watch: boolean;
+
 	readonly copyFiles: boolean;
+
 	readonly outFileExtension: string;
+
 	readonly includeDotfiles: boolean;
+
 	readonly deleteDirOnStart: boolean;
+
 	readonly quiet: boolean;
 
 	readonly only: string[];
+
 	readonly ignore: string[];
 }
 
@@ -287,12 +303,16 @@ export interface Callbacks {
 		compiled?: number;
 		/** count of copied files */
 		copied?: number;
+
 		filename?: string;
 	}) => any;
+
 	readonly onFail?: (data: {
 		duration: number;
+
 		reasons: Map<string, string>;
 	}) => any;
+
 	readonly onWatchReady?: () => any;
 }
 
@@ -385,9 +405,11 @@ export default function parserArgs(args: string[]) {
 
 			if (i === -1) {
 				key = cfg;
+
 				value = true;
 			} else {
 				key = cfg.substring(0, i);
+
 				value = unstringify(cfg.substring(i + 1));
 			}
 			// https://github.com/swc-project/cli/issues/45
@@ -401,6 +423,7 @@ export default function parserArgs(args: string[]) {
 				if (options[keyPart] === undefined && index !== lastIndex) {
 					options[keyPart] = {};
 				}
+
 				if (index === lastIndex) {
 					options[keyPart] = value;
 				} else {

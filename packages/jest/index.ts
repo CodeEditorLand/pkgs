@@ -19,10 +19,15 @@ function createTransformer(
 		experimental?: {
 			customCoverageInstrumentation?: {
 				enabled: boolean;
+
 				coverageVariable?: string;
+
 				compact?: boolean;
+
 				reportLogic?: boolean;
+
 				ignoreClassMethods?: Array<string>;
+
 				instrumentLog?: { level: string; enableTrace: boolean };
 			};
 		};
@@ -116,6 +121,7 @@ function getOptionsFromSwrc(): Options {
 
 		return options as Options;
 	}
+
 	return {};
 }
 
@@ -218,6 +224,7 @@ function set(obj: any, path: string, value: any) {
 
 	for (const prop of parents) {
 		if (o[prop] == null) o[prop] = {};
+
 		o = o[prop];
 	}
 
