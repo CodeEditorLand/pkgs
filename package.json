@@ -34,8 +34,5 @@
 			"taplo format"
 		]
 	},
-	"name": "swc-extra-packages-workspace",
-	"scripts": {
-		"prepare": "husky install && git config feature.manyFiles true"
-	}
+	"name": "swc-extra-packages-workspace"
 }
