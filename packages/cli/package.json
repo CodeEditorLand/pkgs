@@ -21,7 +21,7 @@
 		"@swc/core": "1.9.3",
 		"@swc/jest": "workspace:^",
 		"@swc/types": "0.1.17",
-		"@types/node": "22.10.0",
+		"@types/node": "22.10.1",
 		"@types/semver": "7.5.8",
 		"chokidar": "4.0.1",
 		"deepmerge": "4.3.1"
