@@ -1,42 +1,16 @@
 {
+	"name": "@codeeditorland/cli",
+	"description": "CLI for the swc project",
+	"main": "lib/swc/index.js",
 	"bin": {
 		"spack": "./bin/spack.js",
 		"swc": "./bin/swc.js",
 		"swcx": "./bin/swcx.js"
 	},
-	"dependencies": {
-		"@codeeditorland/counter": "workspace:^",
-		"@xhmikosr/bin-wrapper": "^13.0.5",
-		"commander": "^12.1.0",
-		"fast-glob": "^3.3.2",
-		"minimatch": "^10.0.1",
-		"piscina": "^4.8.0",
-		"semver": "^7.6.3",
-		"slash": "5.1.0",
-		"source-map": "^0.7.4"
-	},
-	"description": "CLI for the swc project",
-	"devDependencies": {
-		"@codeeditorland/cli": "0.5.2",
-		"@codeeditorland/core": "^1.10.0",
-		"@codeeditorland/jest": "workspace:^",
-		"@codeeditorland/types": "^0.1.17",
-		"@types/node": "^22.10.1",
-		"@types/semver": "^7.5.8",
-		"chokidar": "^4.0.1",
-		"deepmerge": "^4.3.1"
-	},
 	"files": [
 		"bin",
 		"lib"
 	],
-	"main": "lib/swc/index.js",
-	"name": "@codeeditorland/cli",
-	"peerDependenciesMeta": {
-		"chokidar": {
-			"optional": true
-		}
-	},
 	"scripts": {
 		"build": "swc src --strip-leading-paths -d lib --ignore '**/*.test.ts' --ignore '**/__mocks__/**'",
 		"build:watch": "swc src --strip-leading-paths -d lib --watch --ignore '**/*.test.ts' --ignore '**/__mocks__/**'",
@@ -47,5 +21,31 @@
 		"test:watch": "jest --watch",
 		"types": "tsc",
 		"types:watch": "tsc --watch"
+	},
+	"dependencies": {
+		"@codeeditorland/counter": "0.0.1",
+		"@xhmikosr/bin-wrapper": "^13.0.5",
+		"commander": "^12.1.0",
+		"fast-glob": "^3.3.2",
+		"minimatch": "^10.0.1",
+		"piscina": "^4.8.0",
+		"semver": "^7.6.3",
+		"slash": "5.1.0",
+		"source-map": "^0.7.4"
+	},
+	"devDependencies": {
+		"@codeeditorland/cli": "0.0.1",
+		"@codeeditorland/core": "0.0.1",
+		"@codeeditorland/jest": "0.0.1",
+		"@codeeditorland/types": "0.0.1",
+		"@types/node": "^22.10.1",
+		"@types/semver": "^7.5.8",
+		"chokidar": "^4.0.1",
+		"deepmerge": "^4.3.1"
+	},
+	"peerDependenciesMeta": {
+		"chokidar": {
+			"optional": true
+		}
 	}
 }

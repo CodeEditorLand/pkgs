@@ -1,11 +1,11 @@
 {
-	"dependencies": {
-		"@codeeditorland/counter": "workspace:^"
-	},
+	"name": "@codeeditorland/loader",
 	"description": "Webpack plugin for swc",
-	"devDependencies": {
-		"@codeeditorland/core": "1.10.0"
-	},
 	"main": "src/index.js",
-	"name": "@codeeditorland/loader"
+	"dependencies": {
+		"@codeeditorland/counter": "0.0.1"
+	},
+	"devDependencies": {
+		"@codeeditorland/core": "0.0.1"
+	}
 }

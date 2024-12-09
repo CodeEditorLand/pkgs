@@ -1,11 +1,11 @@
 {
+	"name": "spack-example-node-modules",
+	"description": "",
+	"main": "index.js",
+	"scripts": {},
 	"dependencies": {
-		"@codeeditorland/cli": "file:../..",
+		"@codeeditorland/cli": "0.0.1",
 		"path": "0.12.7"
 	},
-	"description": "",
-	"devDependencies": {},
-	"main": "index.js",
-	"name": "spack-example-node-modules",
-	"scripts": {}
+	"devDependencies": {}
 }
