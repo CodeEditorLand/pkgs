@@ -1,8 +1,9 @@
 {
 	"dependencies": {
-		"@swc/cli": "file:../.."
+		"@codeeditorland/cli": "file:../.."
 	},
 	"description": "",
+	"devDependencies": {},
 	"main": "index.js",
 	"name": "spack-example-basic",
 	"scripts": {}

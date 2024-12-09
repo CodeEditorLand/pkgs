@@ -1,10 +1,11 @@
 {
 	"bin": "bin/swc-info.js",
+	"dependencies": {},
 	"description": "CLI tool to help issue reporting for swc",
 	"devDependencies": {
 		"@types/node": "22.10.1"
 	},
-	"name": "swc-info",
+	"name": "@codeeditorland/info",
 	"scripts": {
 		"build": "tsc",
 		"prepack": "pnpm build",

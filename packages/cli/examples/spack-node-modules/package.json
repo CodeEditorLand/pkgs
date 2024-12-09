@@ -1,9 +1,10 @@
 {
 	"dependencies": {
-		"@swc/cli": "file:../..",
+		"@codeeditorland/cli": "file:../..",
 		"path": "0.12.7"
 	},
 	"description": "",
+	"devDependencies": {},
 	"main": "index.js",
 	"name": "spack-example-node-modules",
 	"scripts": {}

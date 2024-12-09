@@ -5,7 +5,7 @@
 		"swcx": "./bin/swcx.js"
 	},
 	"dependencies": {
-		"@swc/counter": "workspace:^",
+		"@codeeditorland/counter": "workspace:^",
 		"@xhmikosr/bin-wrapper": "^13.0.5",
 		"commander": "^12.1.0",
 		"fast-glob": "^3.3.2",
@@ -17,10 +17,10 @@
 	},
 	"description": "CLI for the swc project",
 	"devDependencies": {
-		"@swc/cli": "0.5.2",
-		"@swc/core": "^1.10.0",
-		"@swc/jest": "workspace:^",
-		"@swc/types": "^0.1.17",
+		"@codeeditorland/cli": "0.5.2",
+		"@codeeditorland/core": "^1.10.0",
+		"@codeeditorland/jest": "workspace:^",
+		"@codeeditorland/types": "^0.1.17",
 		"@types/node": "^22.10.1",
 		"@types/semver": "^7.5.8",
 		"chokidar": "^4.0.1",
@@ -31,7 +31,7 @@
 		"lib"
 	],
 	"main": "lib/swc/index.js",
-	"name": "@swc/cli",
+	"name": "@codeeditorland/cli",
 	"peerDependenciesMeta": {
 		"chokidar": {
 			"optional": true

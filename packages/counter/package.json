@@ -1,6 +1,8 @@
 {
+	"dependencies": {},
 	"description": "Downloade counter for the swc project",
+	"devDependencies": {},
 	"main": "index.js",
-	"name": "@swc/counter",
+	"name": "@codeeditorland/counter",
 	"sideEffects": false
 }
