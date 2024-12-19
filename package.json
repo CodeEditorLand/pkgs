@@ -2,7 +2,7 @@
 	"name": "@codeeditorland/extra-packages-workspace",
 	"funding": {
 		"type": "opencollective",
-		"url": "https://opencollective.com/swc"
+		"url": "HTTPS://opencollective.com/swc"
 	},
 	"lint-staged": {
 		"!(**/tests/**/*)*.js": [
