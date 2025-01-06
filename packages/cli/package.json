@@ -25,8 +25,8 @@
 	"dependencies": {
 		"@codeeditorland/counter": "0.0.1",
 		"@xhmikosr/bin-wrapper": "13.0.5",
-		"commander": "12.1.0",
-		"fast-glob": "3.3.2",
+		"commander": "13.0.0",
+		"fast-glob": "3.3.3",
 		"minimatch": "10.0.1",
 		"piscina": "4.8.0",
 		"semver": "7.6.3",
@@ -38,9 +38,9 @@
 		"@codeeditorland/core": "0.0.1",
 		"@codeeditorland/jest": "0.0.1",
 		"@codeeditorland/types": "0.0.1",
-		"@types/node": "22.10.1",
+		"@types/node": "22.10.5",
 		"@types/semver": "7.5.8",
-		"chokidar": "4.0.1",
+		"chokidar": "4.0.3",
 		"deepmerge": "4.3.1"
 	},
 	"peerDependenciesMeta": {
