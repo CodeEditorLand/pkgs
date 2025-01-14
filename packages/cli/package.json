@@ -25,23 +25,23 @@
 	"dependencies": {
 		"@codeeditorland/counter": "workspace:^",
 		"@xhmikosr/bin-wrapper": "13.0.5",
-		"commander": "8.3.0",
-		"fast-glob": "3.2.5",
-		"minimatch": "9.0.3",
-		"piscina": "4.3.1",
-		"semver": "7.3.8",
-		"slash": "3.0.0",
-		"source-map": "0.7.3"
+		"commander": "13.0.0",
+		"fast-glob": "3.3.3",
+		"minimatch": "10.0.1",
+		"piscina": "4.8.0",
+		"semver": "7.6.3",
+		"slash": "5.1.0",
+		"source-map": "0.7.4"
 	},
 	"devDependencies": {
 		"@codeeditorland/cli": "0.6.0",
 		"@codeeditorland/core": "1.6.4",
 		"@codeeditorland/jest": "workspace:^",
 		"@codeeditorland/types": "0.1.9",
-		"@types/node": "20.11.5",
-		"@types/semver": "7.3.13",
-		"chokidar": "4.0.1",
-		"deepmerge": "4.2.2"
+		"@types/node": "22.10.6",
+		"@types/semver": "7.5.8",
+		"chokidar": "4.0.3",
+		"deepmerge": "4.3.1"
 	},
 	"peerDependenciesMeta": {
 		"chokidar": {
