@@ -38,7 +38,7 @@
 		"@codeeditorland/core": "1.6.4",
 		"@codeeditorland/jest": "workspace:^",
 		"@codeeditorland/types": "0.1.9",
-		"@types/node": "22.10.6",
+		"@types/node": "22.10.7",
 		"@types/semver": "7.5.8",
 		"chokidar": "4.0.3",
 		"deepmerge": "4.3.1"

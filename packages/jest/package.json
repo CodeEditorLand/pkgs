@@ -23,6 +23,6 @@
 	"devDependencies": {
 		"@codeeditorland/core": "0.0.1",
 		"@jest/transform": "29.7.0",
-		"@types/node": "22.10.6"
+		"@types/node": "22.10.7"
 	}
 }
