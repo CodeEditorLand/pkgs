@@ -1,15 +1,1 @@
-{
-	"name": "@codeeditorland/info",
-	"description": "CLI tool to help issue reporting for swc",
-	"sideEffects": false,
-	"bin": "bin/swc-info.js",
-	"scripts": {
-		"build": "tsc",
-		"prepack": "pnpm build",
-		"prepublishOnly": "pnpm build"
-	},
-	"dependencies": {},
-	"devDependencies": {
-		"@types/node": "22.13.0"
-	}
-}
+

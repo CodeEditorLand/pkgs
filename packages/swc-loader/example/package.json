@@ -1,12 +1,1 @@
-{
-	"name": "example",
-	"main": "index.js",
-	"scripts": {
-		"build": "webpack && cp public/* build",
-		"start": "ecstatic build --port 3000"
-	},
-	"dependencies": {},
-	"devDependencies": {
-		"ecstatic": "4.1.4"
-	}
-}
+
