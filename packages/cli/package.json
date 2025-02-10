@@ -29,7 +29,7 @@
 		"fast-glob": "3.3.3",
 		"minimatch": "10.0.1",
 		"piscina": "4.8.0",
-		"semver": "7.7.0",
+		"semver": "7.7.1",
 		"slash": "5.1.0",
 		"source-map": "0.7.4"
 	},
@@ -38,7 +38,7 @@
 		"@codeeditorland/core": "1.6.4",
 		"@codeeditorland/jest": "workspace:^",
 		"@codeeditorland/types": "0.1.9",
-		"@types/node": "22.13.0",
+		"@types/node": "22.13.1",
 		"@types/semver": "7.5.8",
 		"chokidar": "4.0.3",
 		"deepmerge": "4.3.1"
